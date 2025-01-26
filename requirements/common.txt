@@ -1,0 +1,19 @@
+psycopg[binary]
+python-dotenv
+Flask
+flask-sqlalchemy
+gunicorn
+structlog
+pandas[performance, plot, computation, excel, xml, hdf5]
+polars-lts-cpu
+ibis-framework[pandas, polars]
+statsmodels
+japanize-matplotlib
+seaborn
+fastcluster
+statannotations
+scikit-learn
+rdkit
+biopython
+bioinfokit
+scanpy

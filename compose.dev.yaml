@@ -1,0 +1,60 @@
+services:
+  postgres:
+    platform: linux/x86_64
+    image: postgres:17
+    container_name: postgres
+    environment:
+      - TZ=Asia/Tokyo
+    env_file:
+      - ./instance/.env.dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - postgres-flask-nginx-network
+  flask:
+    platform: linux/x86_64
+    image: biobr131/flask-dev
+    container_name: flask
+    build: 
+      context: .
+      args:
+        DIR_WORK: "/usr/src/app"
+        ENV_YML: "environment.yaml"
+        VENV: "bioinfo"
+        DIR_CONDA: "/opt/conda"
+        REQ_DIR: "requirements/"
+        REQ_TXT: "dev.txt"
+    command: gunicorn main:app -b 0.0.0.0:5000
+    volumes:
+      - .:/usr/src/app
+    expose:
+      - "5000"
+    env_file:
+      - ./instance/.env.dev
+    depends_on:
+      - postgres
+    networks:
+      - postgres-flask-nginx-network
+  nginx:
+    platform: linux/x86_64
+    image: biobr131/flask-nginx
+    container_name: nginx
+    build: ./nginx
+    volumes:
+      - ./app/static:/usr/src/app/static
+      - ./app/media:/usr/src/app/media
+    ports:
+      - "80:80"
+    depends_on:
+      - flask
+    networks:
+      - postgres-flask-nginx-network
+
+networks:
+  postgres-flask-nginx-network:
+    driver: bridge
+
+volumes:
+  postgres_data:

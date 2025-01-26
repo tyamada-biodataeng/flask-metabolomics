@@ -1,0 +1,47 @@
+[tool.tox]
+legacy_tox_ini = """
+    [tox]
+    skipdist = True
+    env_list = 
+        black
+        ruff
+        mypy
+        pytest
+
+    [black]
+    deps = black
+    commands = black .
+
+    [ruff]
+    deps = ruff
+    commands = ruff check .
+
+    [mypy]
+    deps = mypy
+    commands = mypy .
+
+    [pytest]
+    deps = pytest
+    commands = pytest
+"""
+
+[tool.pytest.ini_options]
+python_files = ["test_*.py"]
+addopts = "-v --reuse-db"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["app"]
+
+[tool.ruff]
+lint.ignore = ['E501']
+lint.select = [
+    'C9',  # mccabe
+    'E',  # pycodestyle Error
+    'F',  # PyFlakes
+    'W',  # pycodestyle Warning
+    'I',  # isort
+]
+line-length = 120
+src = ['.']

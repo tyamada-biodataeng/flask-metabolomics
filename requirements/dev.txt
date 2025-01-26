@@ -1,0 +1,10 @@
+-r common.txt
+black
+ruff
+mypy
+tox
+pytest-flask
+pytest-randomly
+pytest-cov
+pytest-structlog
+sphinx

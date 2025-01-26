@@ -1,0 +1,20 @@
+<header>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container">
+            <h1><a class="navbar-brand" href="{{ url_for ('index') }}">App</a></h1>
+            <ul class="navbar-nav ms-auto">
+                {% if g.user %}
+                    <div class="nav-item d-flex">
+                        <li class="me-2"><span>{{ g.user['username'] }}</span>
+                        <li ><a href="{{ url_for('auth.logout') }}" class="nav-link">Log Out</a>
+                    </div>
+                {% else %}
+                    <div class="nav-item d-flex">
+                        <li class="me-2"><a href="{{ url_for('auth.signup') }}" class="nav-link">Sign Up</a>
+                        <li><a href="{{ url_for('auth.login') }}" class="nav-link">Log In</a>
+                    </div>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</header>
