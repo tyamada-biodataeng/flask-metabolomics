@@ -3,6 +3,7 @@ black
 ruff
 mypy
 tox
+pytest
 pytest-flask
 pytest-randomly
 pytest-cov
