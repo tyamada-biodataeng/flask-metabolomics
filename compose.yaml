@@ -1,6 +1,5 @@
 services:
   postgres:
-    platform: linux/x86_64
     image: postgres:17
     container_name: postgres
     environment:
@@ -14,7 +13,6 @@ services:
     networks:
       - postgres-flask-nginx-network
   flask:
-    platform: linux/x86_64
     image: tyamadabiodataeng/flask
     container_name: flask
     build: 
@@ -38,7 +36,6 @@ services:
     networks:
       - postgres-flask-nginx-network
   nginx:
-    platform: linux/x86_64
     image: tyamadabiodataeng/flask-nginx
     container_name: nginx
     build: ./nginx
