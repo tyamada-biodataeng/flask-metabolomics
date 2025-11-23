@@ -21,8 +21,7 @@ services:
         DIR_WORK: "/usr/src/app"
         ENV_YML: "environment.yaml"
         VENV: "bioinfo"
-        DIR_CONDA: "/opt/conda"
-        REQ_DIR: "requirements/"
+        REQ_DIR: "requirements"
         REQ_TXT: "prod.txt"
     command: gunicorn main:app -b 0.0.0.0:5000
     volumes:
